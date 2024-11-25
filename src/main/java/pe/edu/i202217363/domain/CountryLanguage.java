@@ -5,25 +5,25 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "countrylanguage")
 public class CountryLanguage {
-    @Id
-    private String Language;
+    @EmbeddedId
+    private LanguagePk LanguagePk;
     private String IsOfficial;
     private Double Percentage;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "CountryCode", nullable = false)
+    @MapsId("CountryCode")
     private Country country;
 
     public CountryLanguage() {
     }
 
-    public CountryLanguage(String language) {
-        Language = language;
+    public CountryLanguage(pe.edu.i202217363.domain.LanguagePk languagePk) {
+        LanguagePk = languagePk;
     }
 
-    public CountryLanguage(String language, String isOfficial, Double percentage, Country country) {
-        Language = language;
+    public CountryLanguage(pe.edu.i202217363.domain.LanguagePk languagePk, String isOfficial, Double percentage, Country country) {
+        LanguagePk = languagePk;
         IsOfficial = isOfficial;
         Percentage = percentage;
         this.country = country;
@@ -32,19 +32,19 @@ public class CountryLanguage {
     @Override
     public String toString() {
         return "CountryLanguage{" +
-                "Language='" + Language + '\'' +
+                "LanguagePk=" + LanguagePk +
                 ", IsOfficial='" + IsOfficial + '\'' +
                 ", Percentage=" + Percentage +
                 ", country=" + country +
                 '}';
     }
 
-    public String getLanguage() {
-        return Language;
+    public pe.edu.i202217363.domain.LanguagePk getLanguagePk() {
+        return LanguagePk;
     }
 
-    public void setLanguage(String language) {
-        Language = language;
+    public void setLanguagePk(pe.edu.i202217363.domain.LanguagePk languagePk) {
+        LanguagePk = languagePk;
     }
 
     public String getIsOfficial() {
